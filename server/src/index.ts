@@ -5,7 +5,7 @@ import express, { Request, Response } from 'express';
 import cors from 'cors';
 import mongoose from 'mongoose';
 import Deck from './models/Deck';
-import Signup from './models/Signup';
+import User from './models/User';
 
 const PORT = 5000;
 
@@ -22,14 +22,22 @@ app.get('/', (req: Request, res: Response) => {
 	res.send('J Master Bweem');
 });
 
-// start signup user
+app.get('/users', async (req: Request, res: Response) => {
+	const users = await User.find();
+	res.json(users);
+});
 
-app.get('/user', (req: Request, res: Response) => {});
+app.get('/user/:userId', async (req: Request, res: Response) => {
+	const user = await User.findOne({ _id: req.params.userId });
+	res.json(user);
+});
+
+// start User user
 
 app.post('/user', async (req: Request, res: Response) => {
 	const { email, password } = req.body;
 	try {
-		const checkEmailAvailability = await Signup.findOne({ email: email });
+		const checkEmailAvailability = await User.findOne({ email: email });
 
 		if (checkEmailAvailability) {
 			res.json('This email is already in use.');
@@ -41,7 +49,7 @@ app.post('/user', async (req: Request, res: Response) => {
 	}
 });
 
-app.post('/signup', async (req: Request, res: Response) => {
+app.post('/User', async (req: Request, res: Response) => {
 	const { email, password } = req.body;
 
 	const data = {
@@ -50,20 +58,35 @@ app.post('/signup', async (req: Request, res: Response) => {
 	};
 
 	try {
-		const checkEmailAvailability = await Signup.findOne({ email: email });
+		const checkEmailAvailability = await User.findOne({ email: email });
 
 		if (checkEmailAvailability) {
 			res.json('This email is already in use.');
 		} else {
 			res.json('doesnt exist');
-			await Signup.insertMany([data]);
+			await User.insertMany([data]);
 		}
 	} catch (error) {
 		res.json('doesnt exist');
 	}
 });
 
-// end signup user
+// login user
+
+app.post('/login', async (req: Request, res: Response) => {
+	const user = await User.findOne({
+		email: req.body.email,
+		password: req.body.password,
+	});
+
+	if (user) {
+		return res.json({ status: 'ok', user: true });
+	} else {
+		return res.json({ status: 'error', user: false });
+	}
+});
+
+// end User user
 
 app.get('/decks', async (req: Request, res: Response) => {
 	const decks = await Deck.find();
@@ -84,6 +107,17 @@ app.post('/decks', async (req: Request, res: Response) => {
 	});
 	const createdDeck = await newDeck.save();
 	res.json(createdDeck);
+});
+
+// add post
+
+app.post('/post-create', async (req: Request, res: Response) => {
+	const newPost = new Deck({
+		userId: req.body.userId,
+		body: req.body.body,
+	});
+	const createdPost = await newPost.save();
+	res.json(createdPost);
 });
 
 mongoose.connect(process.env.MONGO_URL!).then(() => {

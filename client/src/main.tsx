@@ -10,6 +10,7 @@ import {
 import './scss/globals.scss';
 import Signup from './components/auth/Signup.tsx';
 import Login from './components/auth/Login.tsx';
+import UserProfile from './pages/UserProfile.tsx';
 
 const router = createBrowserRouter([
   {
@@ -33,6 +34,14 @@ const router = createBrowserRouter([
     element: (
       <div>
         <Login />
+      </div>
+    ),
+  },
+  {
+    path: "/user/:userId",
+    element: (
+      <div>
+        <UserProfile />
       </div>
     ),
   },

@@ -1,8 +1,11 @@
 import axios from 'axios';
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Login = () => {
+
+ const history = useNavigate();
+
  const [email, setEmail] = useState('');
  const [password, setPassword] = useState('');
 
@@ -10,12 +13,12 @@ const Login = () => {
   e.preventDefault();
 
   try {
-   await axios.post('/http://localhost:5000/', {
+   await axios.post('http://localhost:5000/signup', {
     email,
     password
    }).then((res) => {
     if (res.data === "This email is already in use.") {
-     console.log('redirect to homepage')
+     history('/')
     }
    })
   } catch (error) {
