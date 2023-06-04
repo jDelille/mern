@@ -1,0 +1,28 @@
+@use '../../scss/variables' as v;
+
+.auth-container {
+	background-color: v.$gray;
+	width: 300px;
+	height: 500px;
+	margin: 0 auto;
+	color: v.$secondaryTextColor;
+	padding: 10px;
+	border-radius: 4px;
+	display: flex;
+	flex-direction: column;
+	.header {
+		margin-bottom: 20px;
+		h1 {
+			font-size: 22px;
+		}
+	}
+	form {
+		display: flex;
+		flex-direction: column;
+		gap: 1rem;
+		a {
+			color: v.$secondaryTextColor;
+			font-size: 14px;
+		}
+	}
+}

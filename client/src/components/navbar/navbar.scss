@@ -1,0 +1,18 @@
+@use '../../scss/variables' as v;
+
+.navbar {
+	display: flex;
+	align-items: center;
+	color: v.$secondaryTextColor;
+	font-size: 14px;
+	.nav-links {
+		margin-left: auto;
+		display: flex;
+		align-items: center;
+		gap: 10px;
+		a {
+			color: v.$secondaryTextColor;
+			text-decoration: none;
+		}
+	}
+}
