@@ -27,8 +27,9 @@ const Login = () => {
     if (res.data.message === 'Wrong email and password combination') {
      return setError(res.data.message)
     }
-    console.log(res.data)
     localStorage.setItem('token', res.data.token);
+    localStorage.setItem('userId', res.data.userID);
+
     return history('/')
    })
   } catch (error) {

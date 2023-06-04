@@ -7,10 +7,17 @@ type User = {
  email: string;
 }
 
+type Post = {
+ _id: string;
+ body: string;
+ userId: string;
+}
+
 const UserProfile = () => {
  const { userId } = useParams();
 
  const [user, setUser] = useState<User>()
+ const [posts, setPosts] = useState<Post[]>([])
 
  useEffect(() => {
   async function fetchUser() {
@@ -19,11 +26,27 @@ const UserProfile = () => {
    setUser(user)
   }
   fetchUser()
+
+  async function fetchUserPosts() {
+   const response = await fetch(`http://localhost:5000/auth/posts?userId=${userId}`)
+   const user = await response.json()
+   setPosts(user)
+  }
+  fetchUserPosts()
  }, [])
+
+ console.log(posts)
 
 
  return (
-  <div>hello {user?.name}</div>
+  <div>hello {user?.name}
+
+   <div>
+    {posts?.map((post) => (
+     <div key={post._id}>{post.body}</div>
+    ))}
+   </div>
+  </div>
  );
 }
 

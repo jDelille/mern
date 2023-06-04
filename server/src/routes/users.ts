@@ -3,6 +3,7 @@ import express, { Request, Response } from 'express';
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
 import User from '../models/User';
+import Post from '../models/Post';
 
 const router = express.Router();
 
@@ -50,6 +51,12 @@ router.post('/login', async (req, res) => {
 	);
 
 	res.json({ token, userID: user._id });
+});
+
+router.get('/posts', async (req: Request, res: Response) => {
+	const { userId } = req.query;
+	const posts = await Post.find({ userId: userId });
+	res.json(posts);
 });
 
 export { router as userRouter };

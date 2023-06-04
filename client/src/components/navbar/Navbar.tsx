@@ -15,8 +15,13 @@ const Navbar = () => {
 
  return (
   <div className='navbar'>
-   <div>Logo</div>
+   <div>
+    <Link to='/' className='link'>Home</Link>
+
+   </div>
    <div className='nav-links'>
+    <Link to='/users' className='link'>Users</Link>
+
     {!isAuthenticated && (
      <>
       <Link to='/login' className='link'>Login</Link>
@@ -24,7 +29,10 @@ const Navbar = () => {
      </>
     )}
     {isAuthenticated && (
-     <button onClick={handleLogout} className='link'>Logout</button>
+     <>
+      <Link to='/create-post' className='link'>Create Post</Link>
+      <button onClick={handleLogout} className='link'>Logout</button>
+     </>
     )}
    </div>
   </div>

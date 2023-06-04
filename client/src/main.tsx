@@ -11,6 +11,8 @@ import './scss/globals.scss';
 import Signup from './components/auth/Signup.tsx';
 import Login from './components/auth/Login.tsx';
 import UserProfile from './pages/UserProfile.tsx';
+import Users from './pages/Users.tsx';
+import CreatePost from './pages/CreatePost.tsx';
 
 const router = createBrowserRouter([
   {
@@ -34,6 +36,22 @@ const router = createBrowserRouter([
     element: (
       <div>
         <Login />
+      </div>
+    ),
+  },
+  {
+    path: "/users",
+    element: (
+      <div>
+        <Users />
+      </div>
+    ),
+  },
+  {
+    path: "/create-post",
+    element: (
+      <div>
+        <CreatePost />
       </div>
     ),
   },
