@@ -1,23 +1,35 @@
 import axios from 'axios';
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
-import './auth.scss';
+import { Link, useNavigate } from 'react-router-dom';
 import Input from '../input/Input';
+import './auth.scss';
+
 const Login = () => {
  const [email, setEmail] = useState('');
  const [password, setPassword] = useState('');
+ const [error, setError] = useState("");
+
+ const history = useNavigate()
 
  async function handleSubmit(e: React.FormEvent) {
   e.preventDefault();
 
   try {
-   await axios.post('/http://localhost:5000/', {
+   await axios.post('http://localhost:5000/auth/login', {
     email,
     password
    }).then((res) => {
-    if (res.data === "This email is already in use.") {
-     console.log('redirect to homepage')
+
+    if (res.data.message === 'User does not exist') {
+     return setError(res.data.message)
     }
+
+    if (res.data.message === 'Wrong email and password combination') {
+     return setError(res.data.message)
+    }
+    console.log(res.data)
+    localStorage.setItem('token', res.data.token);
+    return history('/')
    })
   } catch (error) {
    console.log(error)
@@ -29,6 +41,7 @@ const Login = () => {
    <div className='header'>
     <h1>Sign In</h1>
    </div>
+   {error && <p>{error}</p>}
    <form action='POST' onSubmit={handleSubmit}>
     <Input
      id='email'

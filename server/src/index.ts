@@ -6,6 +6,10 @@ import cors from 'cors';
 import mongoose from 'mongoose';
 import Deck from './models/Deck';
 import User from './models/User';
+import bcrypt from 'bcrypt';
+import jwt from 'jsonwebtoken';
+
+import { userRouter } from './routes/users';
 
 const PORT = 5000;
 
@@ -17,6 +21,7 @@ app.use(
 		origin: '*',
 	})
 );
+app.use('/auth', userRouter);
 
 app.get('/', (req: Request, res: Response) => {
 	res.send('J Master Bweem');
@@ -31,62 +36,6 @@ app.get('/user/:userId', async (req: Request, res: Response) => {
 	const user = await User.findOne({ _id: req.params.userId });
 	res.json(user);
 });
-
-// start User user
-
-app.post('/user', async (req: Request, res: Response) => {
-	const { email, password } = req.body;
-	try {
-		const checkEmailAvailability = await User.findOne({ email: email });
-
-		if (checkEmailAvailability) {
-			res.json('This email is already in use.');
-		} else {
-			res.json('doesnt exist');
-		}
-	} catch (error) {
-		res.json('doesnt exist');
-	}
-});
-
-app.post('/User', async (req: Request, res: Response) => {
-	const { email, password } = req.body;
-
-	const data = {
-		email: email,
-		password: password,
-	};
-
-	try {
-		const checkEmailAvailability = await User.findOne({ email: email });
-
-		if (checkEmailAvailability) {
-			res.json('This email is already in use.');
-		} else {
-			res.json('doesnt exist');
-			await User.insertMany([data]);
-		}
-	} catch (error) {
-		res.json('doesnt exist');
-	}
-});
-
-// login user
-
-app.post('/login', async (req: Request, res: Response) => {
-	const user = await User.findOne({
-		email: req.body.email,
-		password: req.body.password,
-	});
-
-	if (user) {
-		return res.json({ status: 'ok', user: true });
-	} else {
-		return res.json({ status: 'error', user: false });
-	}
-});
-
-// end User user
 
 app.get('/decks', async (req: Request, res: Response) => {
 	const decks = await Deck.find();
