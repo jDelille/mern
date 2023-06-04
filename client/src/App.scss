@@ -1,0 +1,22 @@
+.App {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	position: relative;
+}
+
+.column-main {
+	max-width: 600px;
+	min-width: 600px;
+	width: 600px;
+	padding: 0 10px;
+	background-color: rebeccapurple;
+	overflow-x: hidden;
+}
+
+.App form {
+	display: flex;
+	gap: 10px;
+	justify-content: center;
+	align-items: center;
+}

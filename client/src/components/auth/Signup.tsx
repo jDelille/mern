@@ -27,7 +27,8 @@ const Signup = () => {
  return (
   <div className='auth-container'>
    <div className='header'>
-    <h1>Create an account</h1>
+    <h1>Let's get you set up on Bweem.io.</h1>
+    <p>With an account you'll be able to post, follow users, like, comment, and fully interact with other users on the site.</p>
    </div>
 
    <form action='POST' onSubmit={handleSubmit}>

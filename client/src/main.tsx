@@ -7,12 +7,16 @@ import {
   Route,
   Link,
 } from "react-router-dom";
-import './scss/globals.scss';
 import Signup from './components/auth/Signup.tsx';
 import Login from './components/auth/Login.tsx';
 import UserProfile from './pages/UserProfile.tsx';
 import Users from './pages/Users.tsx';
 import CreatePost from './pages/CreatePost.tsx';
+
+import './scss/globals.scss';
+import CurrentUserCard from './components/current-user-card/CurrentUserCard.tsx';
+import LoginPage from './pages/auth/LoginPage.tsx';
+import SignupPage from './pages/auth/SignupPage.tsx';
 
 const router = createBrowserRouter([
   {
@@ -26,17 +30,13 @@ const router = createBrowserRouter([
   {
     path: "/signup",
     element: (
-      <div>
-        <Signup />
-      </div>
+      <SignupPage />
     ),
   },
   {
     path: "/login",
     element: (
-      <div>
-        <Login />
-      </div>
+      <LoginPage />
     ),
   },
   {
@@ -70,5 +70,16 @@ const router = createBrowserRouter([
 ]);
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
-  <RouterProvider router={router} />
+  <div className='ui'>
+    {/* <div className='columns'>
+      <div className='column-left'>
+        <CurrentUserCard />
+      </div>
+      <div className='column-right'>
+        <p>hey</p>
+      </div>
+    </div> */}
+    <RouterProvider router={router} />
+  </div>
+
 )

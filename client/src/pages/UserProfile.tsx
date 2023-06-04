@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import './page.scss';
+import Navbar from '../components/navbar/Navbar';
 
 type User = {
  _id: string;
@@ -39,8 +41,9 @@ const UserProfile = () => {
 
 
  return (
-  <div>hello {user?.name}
-
+  <div className='page'>
+   <Navbar />
+   <h1>hello {user?.name}</h1>
    <div>
     {posts?.map((post) => (
      <div key={post._id}>{post.body}</div>

@@ -40,7 +40,8 @@ const Login = () => {
  return (
   <div className='auth-container'>
    <div className='header'>
-    <h1>Sign In</h1>
+    <h1>Login to Bweem.io</h1>
+    <p>Login with your <span>Bweem.io</span> credentials. If you don't have an account yet, you can create a free one to get started.</p>
    </div>
    {error && <p>{error}</p>}
    <form action='POST' onSubmit={handleSubmit}>

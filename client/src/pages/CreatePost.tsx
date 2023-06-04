@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import Navbar from "../components/navbar/Navbar";
+import './page.scss';
 
 type PostProps = {
  _id: string;
@@ -49,7 +50,7 @@ const CreatePost = () => {
  }
 
  return (
-  <div>
+  <div className="page">
    <Navbar />
    <form onSubmit={handleCreatePost}>
     <label htmlFor='body'>Body</label>

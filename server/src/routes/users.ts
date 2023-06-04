@@ -53,6 +53,11 @@ router.post('/login', async (req, res) => {
 	res.json({ token, userID: user._id });
 });
 
+router.get('/user/:userId', async (req: Request, res: Response) => {
+	const currentUser = await User.findById({ _id: req.params.userId });
+	res.json(currentUser);
+});
+
 router.get('/posts', async (req: Request, res: Response) => {
 	const { userId } = req.query;
 	const posts = await Post.find({ userId: userId });

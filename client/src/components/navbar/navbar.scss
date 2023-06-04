@@ -5,6 +5,15 @@
 	align-items: center;
 	color: v.$secondaryTextColor;
 	font-size: 14px;
+	position: fixed;
+	height: 55px;
+	top: 0;
+	z-index: 3;
+	background-color: gray;
+	width: 100vw;
+	padding: 0 1rem;
+	left: 0;
+
 	.nav-links {
 		margin-left: auto;
 		display: flex;
