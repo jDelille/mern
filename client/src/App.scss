@@ -1,3 +1,5 @@
+@use './scss/breakpoints' as b;
+
 .App {
 	display: flex;
 	flex-direction: column;
@@ -9,9 +11,12 @@
 	max-width: 600px;
 	min-width: 600px;
 	width: 600px;
-	padding: 0 10px;
-	background-color: rebeccapurple;
 	overflow-x: hidden;
+	background-color: red;
+	margin-right: 285px;
+	@include b.breakpoint(md) {
+		margin-right: 0;
+	}
 }
 
 .App form {

@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom'
 import Input from '../input/Input';
 import './auth.scss';
+import Button from '../button/Button';
 
 const Signup = () => {
  const [name, setName] = useState('');
@@ -39,6 +40,7 @@ const Signup = () => {
      onChange={(e) => setName(e.target.value)}
      placeholder="John Smith"
      value={name}
+     required
     />
     <Input
      type="text"
@@ -47,6 +49,7 @@ const Signup = () => {
      onChange={(e) => setEmail(e.target.value)}
      placeholder="something@email.com"
      value={email}
+     required
     />
     <Input
      type="password"
@@ -55,10 +58,13 @@ const Signup = () => {
      onChange={(e) => setPassword(e.target.value)}
      placeholder="********"
      value={password}
+     required
     />
-    <button type='submit'>Signup</button>
-    <p>or</p>
-    <Link to='/login'>Already have an account?</Link>
+    <Button label='Create account' />
+    <div className='footer'>
+     <Link to='/login'>Already have an account?</Link>
+
+    </div>
    </form>
   </div>
  );

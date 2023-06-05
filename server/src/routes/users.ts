@@ -11,6 +11,10 @@ router.post('/signup', async (req: Request, res: Response) => {
 	const { email, password, name } = req.body;
 	const user = await User.findOne({ email: email });
 
+	if (!email || !password || !name) {
+		return res.json({ message: 'Invalid E-mail address or password.' });
+	}
+
 	if (user) {
 		return res.json({ message: 'User already exists' });
 	}
@@ -31,16 +35,20 @@ router.post('/signup', async (req: Request, res: Response) => {
 router.post('/login', async (req, res) => {
 	const { email, password } = req.body;
 
+	if (!email || !password) {
+		return res.json({ message: 'Invalid E-mail address or password.' });
+	}
+
 	const user = await User.findOne({ email: email });
 
 	if (!user) {
-		return res.json({ message: 'User does not exist' });
+		return res.json({ message: 'User does not exist.' });
 	}
 
 	const isPasswordValid = await bcrypt.compare(password, user.password);
 
 	if (!isPasswordValid) {
-		return res.json({ message: 'Wrong email and password combination' });
+		return res.json({ message: 'Invalid E-mail address or password.' });
 	}
 
 	const token = jwt.sign(

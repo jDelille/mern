@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Input from '../input/Input';
 import './auth.scss';
+import Button from '../button/Button';
 
 const Login = () => {
  const [email, setEmail] = useState('');
@@ -20,11 +21,11 @@ const Login = () => {
     password
    }).then((res) => {
 
-    if (res.data.message === 'User does not exist') {
+    if (res.data.message === 'User does not exist.') {
      return setError(res.data.message)
     }
 
-    if (res.data.message === 'Wrong email and password combination') {
+    if (res.data.message === 'Invalid E-mail address or password.') {
      return setError(res.data.message)
     }
     localStorage.setItem('token', res.data.token);
@@ -43,7 +44,8 @@ const Login = () => {
     <h1>Login to Bweem.io</h1>
     <p>Login with your <span>Bweem.io</span> credentials. If you don't have an account yet, you can create a free one to get started.</p>
    </div>
-   {error && <p>{error}</p>}
+   {error && <div className='error'>
+    <strong>{error}</strong></div>}
    <form action='POST' onSubmit={handleSubmit}>
     <Input
      id='email'
@@ -61,9 +63,10 @@ const Login = () => {
      value={password}
      onChange={(e) => setPassword(e.target.value)}
     />
-    <button type='submit'>Login</button>
-    <p>or</p>
-    <Link to='/signup'>Create an account</Link>
+    <Button label='Log in' />
+    <div className='footer'>
+     <Link to='/signup'>Create an account</Link>
+    </div>
    </form>
   </div>
  );

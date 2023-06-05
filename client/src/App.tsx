@@ -6,7 +6,7 @@ import PostFeed from './components/post-feed/PostFeed';
 function App() {
   return (
     <div className='App'>
-      <Navbar />
+      {/* <Navbar /> */}
       <div className='column-main'>
         <PostFeed />
       </div>

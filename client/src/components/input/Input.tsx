@@ -8,9 +8,10 @@ type InputProps = {
  placeholder: string;
  value: string;
  type: string;
+ required?: boolean;
 }
 
-const Input: React.FC<InputProps> = ({ id, label, onChange, placeholder, value, type }) => {
+const Input: React.FC<InputProps> = ({ id, label, onChange, placeholder, value, type, required }) => {
  return (
   <div className="input">
    <label htmlFor={id}>{label}</label>
@@ -20,6 +21,7 @@ const Input: React.FC<InputProps> = ({ id, label, onChange, placeholder, value, 
     onChange={onChange}
     value={value}
     placeholder={placeholder}
+    required={required}
    />
   </div>
  );
